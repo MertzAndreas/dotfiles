@@ -1,0 +1,186 @@
+@import "colors.css";
+
+* {
+    all: unset;
+      font-family: "CaskaydiaMono Nerd Font", "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+  }
+
+.normal-icons {
+    -gtk-icon-size: 16px;
+}
+
+.large-icons {
+    -gtk-icon-size: 32px;
+}
+
+scrollbar {
+    opacity: 0;
+}
+
+.box-wrapper {
+    box-shadow:
+        0 19px 38px rgba(0, 0, 0, 0.3),
+        0 15px 12px rgba(0, 0, 0, 0.22);
+    background: @background;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid darker(@base);
+}
+
+.preview-box,
+.elephant-hint,
+.placeholder {
+    color: @foreground;
+}
+
+.box {
+}
+
+.search-container {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.input placeholder {
+    font-size: 24px;
+    opacity: 0.8;
+    color : @text;
+}
+
+.input selection {
+    background: lighter(lighter(lighter(@background)));
+}
+
+.input {
+    caret-color: @foreground;
+    font-size: 24px;
+    background: lighter(@background);
+    padding: 10px;
+    color: @text;
+}
+
+.input:focus,
+.input:active {
+}
+
+.content-container {
+}
+
+.placeholder {
+}
+
+.scroll {
+}
+
+.list {
+    color: @text;
+}
+
+child {
+}
+
+.item-box {
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.item-quick-activation {
+    background: alpha(@border, 0.25);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+child:hover .item-box,
+child:selected .item-box {
+    background: alpha(@border, 0.25);
+}
+
+.item-text-box {
+    font-size: 20px;
+}
+
+.item-subtext {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+.providerlist .item-subtext {
+    font-size: unset;
+    opacity: 0.75;
+}
+
+.item-image-text {
+    font-size: 28px;
+}
+
+.preview {
+    border: 1px solid alpha(@border, 0.25);
+    border-radius: 10px;
+    color: @foreground;
+}
+
+.calc .item-text {
+    font-size: 24px;
+}
+
+.calc .item-subtext {
+}
+
+.symbols .item-image {
+    font-size: 24px;
+}
+
+.todo.done .item-text-box {
+    opacity: 0.25;
+}
+
+.todo.urgent {
+    font-size: 24px;
+}
+
+.todo.active {
+    font-weight: bold;
+}
+
+.bluetooth.disconnected {
+    opacity: 0.5;
+}
+
+.preview .large-icons {
+    -gtk-icon-size: 64px;
+}
+
+.keybinds-wrapper {
+    font-size: 0px;
+    opacity: 0;
+    color: @foreground;
+}
+
+.keybinds {
+}
+
+.keybind {
+}
+
+.keybind-bind {
+    font-weight: bold;
+    text-transform: lowercase;
+}
+
+.keybind-label {
+}
+
+.error {
+    padding: 10px;
+    background: @selected-text;
+    color: @text;
+}
+
+:not(.calc).current {
+    font-style: italic;
+}
+
+.preview-content.archlinuxpkgs {
+    font-family: "CaskaydiaMono Nerd Font";
+}
+

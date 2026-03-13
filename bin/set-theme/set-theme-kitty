@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Path to active theme (symlink)
+THEME_DIR="$HOME/.current-theme"
+THEME=$(basename "$THEME_DIR") # optional, for logging
+
+KITTY_DIR="$HOME/.config/kitty"
+THEME_FILE="$THEME_DIR/kitty.conf"
+TARGET_FILE="$KITTY_DIR/colors.conf"
+
+[[ -f "$THEME_FILE" ]] || {
+  echo "No kitty.conf found in $THEME_DIR, skipping Kitty"
+  exit 0
+}
+
+mkdir -p "$KITTY_DIR"
+cp "$THEME_FILE" "$TARGET_FILE"
+pkill -SIGUSR1 kitty || true
+
+echo "Kitty set to theme: $THEME"

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+HYPRLOCK_BG="$HOME/.config/hypr/hyprlock.png"
+CURRENT_THEME_LINK="$HOME/.current-theme"
+BG_DIR="$CURRENT_THEME_LINK/backgrounds"
+
+# Put state outside the theme folder
+STATE_FILE="$HOME/.cache/current_bg"
+
+# Reset if current background is not in this theme
+current=$(cat "$STATE_FILE" 2>/dev/null || "")
+found=false
+for img in "$BG_DIR"/*.{png,jpg}; do
+  [[ "$img" == "$current" ]] && found=true
+done
+[[ "$found" == false ]] && current=""
+
+# Collect all background images
+images=($(find "$BG_DIR" -type f \( -iname '*.png' -o -iname '*.jpg' \) | sort))
+
+# Determine next image index
+next_index=0
+for i in "${!images[@]}"; do
+  if [[ "${images[i]}" == "$current" ]]; then
+    next_index=$(((i + 1) % ${#images[@]}))
+    break
+  fi
+done
+
+next_image="${images[$next_index]}"
+echo "$next_image" >"$STATE_FILE"
+
+# Capture current swaybg PIDs
+old_pids=($(pgrep -x swaybg))
+
+# Launch new background
+swaybg -i "$next_image" -m fill &
+
+new_pid=$!
+
+# Wait until the new swaybg shows up in the process list
+while ! ps -p "$new_pid" >/dev/null; do
+  sleep 0.01
+done
+
+# Kill old background(s)
+for pid in "${old_pids[@]}"; do
+  [[ "$pid" != "$new_pid" ]] && kill "$pid"
+done
+
+current_bg="$next_image" # from your rotation logic
+cp "$current_bg" "$HYPRLOCK_BG"
+echo "Background rotated to: $next_image"

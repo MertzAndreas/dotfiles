@@ -1,0 +1,23 @@
+#!/bin/bash
+
+declare -A OPTIONS=(
+  ["  Lock"]="hyprlock"
+  ["  Reboot"]="systemctl reboot"
+  ["  Shutdown"]="systemctl poweroff"
+  ["󰈆  Logout"]="swaymsg exit"
+  ["󱧕  Install package"]="launch-terminal install-package"
+  ["󱧔  Uninstall package"]="launch-terminal uninstall-package"
+  ["  Configure nvim"]="configure-nvim"
+  ["󰂯  Bluetooth"]="launch-terminal bluetui"
+  ["  Github"]="chromium https://github.com/SmartEVP8"
+  ["󰍳  Minecraft music"]="chromium https://www.youtube.com/watch?v=yJ6Lbsmb1lY"
+)
+
+# Create the menu list
+MENU=$(printf "%s\n" "${!OPTIONS[@]}")
+
+# Show menu
+SELECTION=$(echo -e "$MENU" | walker --dmenu --width 500 --minheight 1 -p "")
+
+# Execute mapped command
+[[ -n "$SELECTION" ]] && ${OPTIONS["$SELECTION"]}

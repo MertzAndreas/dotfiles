@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Path to active theme (symlink)
+THEME_DIR="$HOME/.current-theme"
+STATE_FILE="$HOME/.cache/current_bg"
+
+# Find a background image
+BG_FILE=$(find "$THEME_DIR/backgrounds" -type f \( -iname '*.png' -o -iname '*.jpg' \) | sort | head -n 1)
+
+if [[ -z "$BG_FILE" ]]; then
+  echo "No background found"
+  exit 1
+fi
+
+# Kill old swaybg and start the new one
+pkill swaybg
+swaybg -i "$BG_FILE" -m fill &
+ln -sf "$BG_FILE" ~/.cache/current_bg_image
+
+# Update the cache so next-background knows the current image
+echo "$BG_FILE" >"$STATE_FILE"
+
+echo "Sway background set to: $BG_FILE"

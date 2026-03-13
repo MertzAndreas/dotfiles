@@ -1,0 +1,43 @@
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlf = input
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    pager = less -FRX
+
+[color]
+    ui = auto
+
+[pull]
+    rebase = true
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[rebase]
+    autoStash = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    lg = log --oneline --graph --decorate --all
+    undo = reset --soft HEAD~1
+    wip = commit -am "wip"
+    unstage = restore --staged
+
+[user]
+    name = MertzAndreas
+    email = Andreasmertz11@gmail.com

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if pid=$(pgrep -x "waybar"); then
+  # If waybar is running, kill it
+  kill "$pid"
+else
+  # Otherwise, start waybar
+  waybar &
+fi

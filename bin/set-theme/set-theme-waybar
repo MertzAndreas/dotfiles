@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Path to active theme (symlink)
+THEME_DIR="$HOME/.current-theme"
+THEME=$(basename "$THEME_DIR") # optional, for logging
+
+WAYBAR_DIR="$HOME/.config/waybar"
+THEME_CSS="$THEME_DIR/waybar.css"
+TARGET_CSS="$WAYBAR_DIR/colors.css"
+
+if [[ ! -f "$THEME_CSS" ]]; then
+  echo "No waybar.css found in $THEME_DIR, skipping Waybar"
+  exit 0
+fi
+
+mkdir -p "$WAYBAR_DIR"
+cp "$THEME_CSS" "$TARGET_CSS"
+
+pkill -x waybar 2>/dev/null || true
+nohup waybar >/dev/null 2>&1 &
+disown
+
+echo "Waybar set to theme: $THEME"

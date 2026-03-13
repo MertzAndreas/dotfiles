@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+DIR=$(readlink /proc/$(ps --no-headers --ppid $(niri msg focused-window | grep '^  PID:' | grep -o '[0-9]\+') -o pid,comm | awk '/zsh|bash|fish|sh/ {print $1}')/cwd)
+kitty --directory "$DIR"

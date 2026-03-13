@@ -1,0 +1,85 @@
+@import "colors.css";
+
+* {
+    background-color: @background;
+    color: @foreground;
+    font-family: "CaskaydiaMono Nerd Font", "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(43, 48, 59, 0.1);
+}
+
+tooltip {
+  padding: 5px;
+  background: rgba(43, 48, 59, 0.4);
+  border: 1px solid rgba(100, 114, 125, 0.9);
+}
+tooltip label {
+  color: white;
+}
+
+.modules-left {
+  margin-left: 20px;
+}
+
+.modules-right {
+  margin-right: 20px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+}
+
+#clock {
+}
+
+#custom-expand-icon {
+  margin-right: 20px;
+}
+
+#custom-power-icon {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+
+#tray {
+  margin-right: 20px;
+}
+#tray > .item {
+    margin-right: 10px; /* Adjust this value to your desired gap */
+}
+#network {
+  margin-right: 25px
+}
+
+#backlight {
+  margin-right: 20px
+}
+
+
+
+#bluetooth {
+  margin-right: 20px
+}
+
+#battery {
+  margin-right: 20px
+}
+
+#pulseaduio {
+  margin-right: 40px
+}
+
+

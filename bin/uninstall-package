@@ -1,0 +1,27 @@
+#!/bin/bash
+
+fzf_args=(
+  --multi
+  --preview 'yay -Qi {1}'
+  --preview-label='alt-p: toggle preview, alt-j/k: scroll, tab: multi-select'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:red,marker:red'
+)
+
+# List all installed packages (both repo + AUR)
+pkg_names=$(yay -Qq | fzf "${fzf_args[@]}")
+
+if [[ -n "$pkg_names" ]]; then
+  # Confirm before uninstalling
+  echo "The following packages will be removed:"
+  echo "$pkg_names" | sed 's/^/  - /'
+  read -rp "Proceed with uninstallation? [y/N] " confirm
+  [[ ! $confirm =~ ^[Yy]$ ]] && exit 0
+
+  sudo -v
+  echo "$pkg_names" | tr '\n' ' ' | xargs yay -Rns --noconfirm
+fi

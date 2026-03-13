@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Check if gnome-keyring-daemon is already running
+if ! pgrep -f "gnome-keyring-daemon" >/dev/null; then
+  # Start keyring and export variables
+  OUTPUT="$(gnome-keyring-daemon --start --components=secrets,pkcs11,ssh)"
+  eval "$OUTPUT"
+  export SSH_AUTH_SOCK
+fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+fzf_args=(
+  --multi
+  --preview 'pacman -Qi {1}'
+  --preview-label='alt-p: toggle description'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:green,marker:green'
+)
+
+pacman -Qq | fzf "${fzf_args[@]}"
