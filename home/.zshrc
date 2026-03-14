@@ -33,9 +33,6 @@ export PATH="$PATH:$HOME/.ghcup/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-# ── dotnet ───────────────────────────────────────────────────────────────────
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$PATH:$DOTNET_ROOT"
 
 # ── Docker ───────────────────────────────────────────────────────────────────
 export DOCKER_BUILDKIT=1
