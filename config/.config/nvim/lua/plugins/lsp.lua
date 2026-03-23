@@ -38,7 +38,6 @@ return {
                     "hls",
                     "clangd",
                     "basedpyright",
-                    "bash-language-server",
                     "gopls",
                     "docker_language_server",
                     "jsonls",
