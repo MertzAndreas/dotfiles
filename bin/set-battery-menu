@@ -4,8 +4,8 @@
 OPTIONS="  Power Saver\n  Balanced\n  Performance"
 
 # Show menu using walker
-SELECTION=$(echo -e "$OPTIONS" | walker --dmenu --width 500 --minheight 1 -p "⚡ Power Mode")
-
+# SELECTION=$(echo -e "$OPTIONS" | walker --dmenu --width 500 --minheight 1 -p "⚡ Power Mode")
+SELECTION=$(echo -e "$OPTIONS" | vicinae dmenu --width 500 -p "⚡ Power Mode")
 # Map selection to power profile
 case "$SELECTION" in
 "  Power Saver")

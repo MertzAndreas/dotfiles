@@ -17,7 +17,9 @@ declare -A OPTIONS=(
 MENU=$(printf "%s\n" "${!OPTIONS[@]}")
 
 # Show menu
-SELECTION=$(echo -e "$MENU" | walker --dmenu --width 500 --minheight 1 -p "")
+
+# SELECTION=$(echo -e "$MENU" | walker --dmenu --width 500 --minheight 1 -p "")
+SELECTION=$(echo -e "$MENU" | vicinae dmenu --width 600 -p "")
 
 # Execute mapped command
 [[ -n "$SELECTION" ]] && ${OPTIONS["$SELECTION"]}

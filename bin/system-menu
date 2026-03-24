@@ -4,7 +4,8 @@
 OPTIONS="  Lock\n  Reboot\n  Shutdown"
 
 # Show menu using walker
-SELECTION=$(echo -e "$OPTIONS" | walker --dmenu --width 500 --minheight 1 -p " Power Options")
+# SELECTION=$(echo -e "$OPTIONS" | vicinae --dmenu --width 500 --minheight 1 -p " Power Options")
+SELECTION=$(echo -e "$OPTIONS" | vicinae dmenu --width 500 -p " Power Options")
 
 # Map selection to actions
 case "$SELECTION" in

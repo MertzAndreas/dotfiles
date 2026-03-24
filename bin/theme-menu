@@ -9,7 +9,8 @@ MENU=$(for theme in "$THEME_DIR"/*/; do
 done)
 
 # Show menu
-SELECTION=$(echo "$MENU" | walker --dmenu --width 500 --minheight 1 -p "Select theme: ")
+# SELECTION=$(echo "$MENU" | walker --dmenu --width 500 --minheight 1 -p "Select theme: ")
+SELECTION=$(echo "$MENU" | vicinae dmenu --width 500 -p "Select theme: ")
 
 # Apply the theme
 [[ -n "$SELECTION" ]] && set-theme-master "$SELECTION"
