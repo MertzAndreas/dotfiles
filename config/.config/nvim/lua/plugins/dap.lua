@@ -56,6 +56,57 @@ return {
                     end,
                 },
             }
+
+            local netcoredbg_adapter = {
+                type = "executable",
+                command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
+                args = { "--interpreter=vscode" },
+            }
+
+            dap.adapters.netcoredbg = netcoredbg_adapter
+            dap.adapters.coreclr = netcoredbg_adapter
+
+            dap.configurations.cs = {
+                {
+                    type = "coreclr",
+                    name = "Launch - netcoredbg",
+                    request = "launch",
+                    program = function()
+                        return require("config.nvim-dap-dotnet").build_dll_path()
+                    end,
+                },
+                {
+                    type = "coreclr",
+                    name = "Test - netcoredbg",
+                    request = "attach",
+                    processId = function()
+                        -- Pick which test project to run
+                        local test_projects = vim.fn.glob(vim.fn.getcwd() .. "/Tests/*/*.csproj", false, true)
+                        local choices = {}
+                        for _, p in ipairs(test_projects) do
+                            table.insert(choices, vim.fn.fnamemodify(p, ":h"))
+                        end
+
+                        vim.ui.select(choices, { prompt = "Select test project:" }, function(choice)
+                            if choice then
+                                -- Launch dotnet test in background
+                                vim.fn.jobstart("VSTEST_HOST_DEBUG=1 dotnet test " .. choice, {
+                                    on_stdout = function(_, data)
+                                        for _, line in ipairs(data) do
+                                            print(line)
+                                        end
+                                    end,
+                                    detach = false,
+                                })
+                            end
+                        end)
+
+                        -- Give it a moment to spawn then pick the process
+                        vim.defer_fn(function() end, 3000)
+                        return require("dap.utils").pick_process({ filter = "dotnet" })
+                    end,
+                },
+            }
         end,
         keys = {
             {
