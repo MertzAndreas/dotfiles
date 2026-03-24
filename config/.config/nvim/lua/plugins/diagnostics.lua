@@ -7,6 +7,13 @@ return {
             require("tiny-inline-diagnostic").setup()
             vim.diagnostic.config({ virtual_text = false })
         end,
+        keys = {
+            {
+                "<leader>xt",
+                "<cmd>TinyInlineDiag toggle<cr>",
+                desc = "Toggle inline diagnostic",
+            },
+        },
     },
     {
         "folke/trouble.nvim",

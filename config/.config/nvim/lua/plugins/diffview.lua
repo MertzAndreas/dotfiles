@@ -18,7 +18,7 @@ return {
                 desc = "Toggle DiffView",
             },
             {
-                "<leader>gc",
+                "<leader>gD",
                 function()
                     require("snacks").picker.git_log({
                         confirm = function(picker, item)
