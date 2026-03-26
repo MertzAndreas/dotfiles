@@ -117,7 +117,24 @@ return {
             {
                 "<leader>gb",
                 function()
-                    Snacks.picker.git_branches()
+                    Snacks.picker.git_branches({
+                        actions = {
+                            delete_branch = function(picker)
+                                local items = picker:selected({ fallback = false })
+                                for _, item in ipairs(items) do
+                                    vim.fn.system({ "git", "branch", "-D", item.branch })
+                                end
+                                picker:refresh()
+                            end,
+                        },
+                        win = {
+                            input = {
+                                keys = {
+                                    ["<C-d>"] = { "delete_branch", mode = { "n", "i" } },
+                                },
+                            },
+                        },
+                    })
                 end,
                 desc = "Git Branches",
             },
