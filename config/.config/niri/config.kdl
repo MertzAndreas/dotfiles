@@ -69,7 +69,15 @@ output "eDP-1" {
     position x=0 y=0
 }
 
+
 output "DP-2" {
+  mode "2560x1440@60.000"
+  transform "normal"
+  scale 1.0
+  position x=-400 y=-1440
+}
+
+output "DP-1" {
   mode "2560x1440@60.000"
   transform "normal"
   scale 1.0
@@ -342,6 +350,9 @@ binds {
     Mod+Shift+J     { move-window-down; }
     Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
+
+    Mod+Alt+Down { focus-monitor-down; }
+    Mod+Alt+Up { focus-monitor-up; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
