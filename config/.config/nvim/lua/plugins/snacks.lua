@@ -66,7 +66,32 @@ return {
             {
                 "<leader><tab>",
                 function()
-                    Snacks.explorer()
+                    Snacks.explorer({
+                        layout = {
+                            layout = {
+                                position = "right",
+                            },
+                        },
+                        actions = {
+                            open_file_manager = function(picker)
+                                ---@diagnostic disable-next-line: undefined-field ive manually found it in: snacks.nvim/lua/snacks/picker/core/picker.lua
+                                local item = picker:current()
+                                if item then
+                                    local path = vim.fs.dirname(item.file)
+                                    vim.fn.jobstart({ "setsid", "nautilus", path }, { detach = true })
+                                    vim.notify("Opening: " .. path)
+                                end
+                                vim.notify("Failed to open file manager")
+                            end,
+                        },
+                        win = {
+                            list = {
+                                keys = {
+                                    ["<C-e>"] = { "open_file_manager", mode = { "n", "i" } },
+                                },
+                            },
+                        },
+                    })
                 end,
                 desc = "File Explorer",
             },
