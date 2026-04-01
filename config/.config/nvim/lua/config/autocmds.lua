@@ -126,12 +126,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Kitty margin management
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
-        vim.defer_fn(function()
-            local socket = os.getenv("KITTY_LISTEN_ON")
-            vim.fn.system("kitty @ --to " .. socket .. " set-spacing padding=0")
-        end, 100)
+        local socket = os.getenv("KITTY_LISTEN_ON")
+        vim.fn.system("kitty @ --to " .. socket .. " set-spacing padding=0")
     end,
 })
+
 vim.api.nvim_create_autocmd("VimLeave", {
     callback = function()
         local socket = os.getenv("KITTY_LISTEN_ON")
