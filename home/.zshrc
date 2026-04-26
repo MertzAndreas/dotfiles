@@ -5,7 +5,7 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions docker docker-compose d
 source $ZSH/oh-my-zsh.sh
 
 # ── Editor ───────────────────────────────────────────────────────────────────
-NVIM_BIN="$HOME/.local/share/bob/nvim-bin/nvim"
+NVIM_BIN="/usr/bin/nvim"
 export EDITOR="$NVIM_BIN"
 export VISUAL="$NVIM_BIN"
 export MANPAGER="nvim +Man!"
@@ -21,7 +21,6 @@ export DISPLAY=:0
 export GDK_DPI_SCALE=0.5
 
 # ── PATH ─────────────────────────────────────────────────────────────────────
-export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH="$HOME/.local/share/pnpm:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
