@@ -3,6 +3,7 @@ input {
         xkb {
             layout "dk"
             variant "nodeadkeys"
+            options "caps:escape"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
         numlock
@@ -43,7 +44,6 @@ input {
         // scroll-button-lock
         // middle-emulation
     }
-
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
@@ -214,21 +214,18 @@ animations {
 }
 
 window-rule {
-  // Rounded corners for a modern look.
   geometry-corner-radius 20
-
-  // Clips window contents to the rounded corner boundaries.
   clip-to-geometry true
 }
 
 window-rule {
     match is-active=false
-    opacity 0.90
+    opacity 0.85
 
 }
 window-rule {
     match is-active=true
-    opacity 0.95
+    opacity 0.90
 }
 
 window-rule {
@@ -285,6 +282,7 @@ debug {
 
 binds {
     Mod+Shift+M repeat=false { spawn-sh "wl-mirror eDP-1"; }
+    Shift+Super+F23 { spawn "true"; }
 
     // Core
     Mod+Alt+K {show-hotkey-overlay; }
