@@ -37,7 +37,13 @@
     undo = reset --soft HEAD~1
     wip = commit -am "wip"
     unstage = restore --staged
+    ca = commit --amend
 
 [user]
     name = MertzAndreas
     email = Andreasmertz11@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
