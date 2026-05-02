@@ -51,6 +51,13 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
+blur {
+    passes 3
+    offset 4.0
+    noise 0.02
+    saturation 1.5
+}
+
 clipboard {
     disable-primary
 }
@@ -107,28 +114,6 @@ layout {
 
     default-column-width { proportion 0.5; }
     
-    focus-ring {
-        width 0
-
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
-
-        active-color "#c0caf5"
-        inactive-color "#505050"
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
-
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
     // You can enable drop shadows for windows.
     shadow {
         on
@@ -145,23 +130,13 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
-spawn-at-startup "elephant"
 spawn-at-startup "spotify-launcher"
 spawn-at-startup "discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
-spawn-at-startup "mako"
 spawn-at-startup "nm-applet"
-spawn-at-startup "swayosd-server"
-spawn-at-startup "hypridle"
 spawn-at-startup "vicinae" "server"
 
 spawn-sh-at-startup "start-keyring"
-// spawn-sh-at-startup "walker --gapplication-service"
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
-spawn-sh-at-startup "next-background"
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
   skip-at-startup
@@ -212,7 +187,21 @@ animations {
         spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
     }
 }
+window-rule {
+  match app-id="vicinae"
+  background-effect {
+    blur true
+    xray false
+  }
+}
 
+layer-rule {
+  match namespace="vicinae"
+  background-effect {
+    blur true
+    xray false
+  }
+}
 window-rule {
   geometry-corner-radius 20
   clip-to-geometry true
@@ -230,7 +219,9 @@ window-rule {
 
 window-rule {
     match app-id=r#"chromium$"# 
+    match app-id=r#"firefox$"# 
     match app-id=r#"discord$"# 
+    match app-id=r#"kitty$"# 
     background-effect {
           blur true
       }
@@ -292,9 +283,6 @@ binds {
     Mod+Tab { focus-workspace-previous; }
 
     Mod+Alt+Space hotkey-overlay-title="Main Menu" { spawn-sh "main-menu"; }
-    Mod+Shift+T hotkey-overlay-title="Select theme" { spawn-sh "theme-menu"; }
-
-
 
     // Screenshots
     Mod+P { screenshot; }
@@ -309,27 +297,10 @@ binds {
     Mod+D hotkey-overlay-title="Open Discord" { spawn-sh "run-or-raise wayland-discord"; }
     Mod+M hotkey-overlay-title="Open Spotify" { spawn-sh "run-or-raise Spotify spotify-launcher"; }
     Mod+E hotkey-overlay-title="File manager: Nautilus" { spawn "nautilus" "--new-window"; }
-    Mod+Y hotkey-overlay-title="Toggle waybar" { spawn-sh "toggle-waybar";}
-    Mod+Shift+C hotkey-overlay-title="Open Editor: VSC" { spawn-sh "code --new-window";}
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume raise"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume lower"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "swayosd-client --brightness +10"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "swayosd-client --brightness -10"; }
-
-    XF86AudioPlay       allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
-    XF86AudioPause      allow-when-locked=true { spawn-sh "swayosd-client --playerctl pause"; }
-    XF86AudioStop       allow-when-locked=true { spawn-sh "swayosd-client --playerctl stop"; }
-    XF86AudioNext       allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
-    XF86AudioPrev       allow-when-locked=true { spawn-sh "swayosd-client --playerctl previous"; }
-
-    Mod+Shift+Plus allow-when-locked=true { spawn-sh "brightnessctl --device='platform::kbd_backlight' set +1"; }
-    Mod+Shift+Minus allow-when-locked=true { spawn-sh "brightnessctl --device='platform::kbd_backlight' set 1-"; }
     // Window
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
@@ -422,11 +393,6 @@ binds {
     Mod+Shift+V       { toggle-window-floating; }
     Mod+Ctrl+V { switch-focus-between-floating-and-tiling; }
 
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
-
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
     // so they may, for example, forward the key presses as-is to a remote machine.
@@ -436,5 +402,10 @@ binds {
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
 }
+
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+include "dms/cursor.kdl"
