@@ -108,7 +108,6 @@ layout {
     //   together with the previously focused column.
     center-focused-column "never"
 
-    background-color "transparent" 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
@@ -188,7 +187,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"chromium$"# 
     match app-id=r#"firefox$"# 
     match app-id=r#"discord$"# 
     match app-id=r#"kitty$"# 
@@ -262,7 +260,6 @@ binds {
     // Applications
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn-sh "kitty-cwd"; }
     Mod+Space repeat=false { spawn "vicinae" "toggle"; }
-    // Mod+Space hotkey-overlay-title="Run an Application: walker" { spawn "walker"; }
     Mod+B hotkey-overlay-title="Open Browser: Firefox" { spawn-sh "firefox"; }
     Mod+D hotkey-overlay-title="Open Discord" { spawn-sh "run-or-raise wayland-discord"; }
     Mod+M hotkey-overlay-title="Open Spotify" { spawn-sh "run-or-raise Spotify spotify-launcher"; }
