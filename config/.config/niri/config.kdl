@@ -376,5 +376,5 @@ include "dms/layout.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
 include "dms/cursor.kdl"
+include "fire-shader.kdl"
 
-include "animations/incinerate.kdl"

@@ -19,10 +19,10 @@ binds {
 
     // Audio Controls
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "increment" "3";
+        spawn "dms" "ipc" "call" "audio" "increment" "5";
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn "dms" "ipc" "call" "audio" "decrement" "3";
+        spawn "dms" "ipc" "call" "audio" "decrement" "5";
     }
     XF86AudioMute allow-when-locked=true {
         spawn "dms" "ipc" "call" "audio" "mute";
@@ -30,10 +30,10 @@ binds {
 
     // Brightness Controls
     XF86MonBrightnessUp allow-when-locked=true {
-       spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+       spawn "dms" "ipc" "call" "brightness" "increment" "10" "";
     }
     XF86MonBrightnessDown allow-when-locked=true {
-       spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+       spawn "dms" "ipc" "call" "brightness" "decrement" "10" "";
     }
 
     // Music Controls

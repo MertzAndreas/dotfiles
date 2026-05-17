@@ -6,8 +6,8 @@ declare -A OPTIONS=(
   ["󱧕  Install package"]="launch-terminal install-package"
   ["󱧔  Uninstall package"]="launch-terminal uninstall-package"
   ["󰂯  Bluetooth"]="launch-terminal bluetui"
-  ["  Github"]="chromium https://github.com/SmartEVP8"
-  ["󰍳  Minecraft music"]="chromium https://www.youtube.com/watch?v=yJ6Lbsmb1lY"
+  ["  Github"]="firefox https://github.com/SmartEVP8"
+  ["󰍳  Minecraft music"]="firefox https://www.youtube.com/watch?v=yJ6Lbsmb1lY"
 )
 
 # Create the menu list
