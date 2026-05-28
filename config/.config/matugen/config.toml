@@ -1,0 +1,9 @@
+[config]
+
+[templates.niri-fire-shader]
+input_path = '/home/mertz/.config/matugen/templates/niri-fire-shader.kdl.template'
+output_path = '/home/mertz/.config/niri/fire-shader.kdl'
+
+[templates.nvim-dankcolors]
+input_path = '/home/mertz/.config/matugen/templates/dankcolors.lua.template'
+output_path = '/home/mertz/.config/nvim/lua/plugins/dankcolors.lua'
