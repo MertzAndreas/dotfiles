@@ -5,5 +5,5 @@ input_path = '/home/mertz/.config/matugen/templates/niri-fire-shader.kdl.templat
 output_path = '/home/mertz/.config/niri/fire-shader.kdl'
 
 [templates.nvim-dankcolors]
-input_path = '/home/mertz/.config/matugen/templates/dankcolors.lua.template'
-output_path = '/home/mertz/.config/nvim/lua/plugins/dankcolors.lua'
+input_path = '/home/mertz/.config/matugen/templates/colors.lua.template'
+output_path = '/home/mertz/.config/nvim/lua/plugins/colors.lua'
